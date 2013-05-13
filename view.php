@@ -24,6 +24,7 @@ if(isset($result)&&$row = $result->fetchRow()){
 else echo 'Es ist ein Fehler bei der Datenbankabfrage aufgetreten.';
 echo '
 <script type="text/javascript">
+	WB_URL = ' . WB_URL . ';
 	function start_cc_loupslider(){
 		$("#slider_front").loupslider({';
 			if ($easing!=''&&$easing!='0') echo '
