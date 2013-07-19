@@ -162,6 +162,7 @@ if(isset($files)&&$files->numRows()>0) {
 					Link:<br/>
 					<input type="text" name="link['.$zahler.']" value="'.$row['link'].'" />
 				</span>
+			</p>
 		</div>
 		<p class="cc_loupslider_zweispalten">
 			<img src="'.$folder_url.'/'.$row['picture'].'" class="cc_preview" width="500" height="auto" />
