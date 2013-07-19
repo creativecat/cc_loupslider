@@ -142,18 +142,6 @@ else echo 'Es ist ein Fehler bei der Datenbankabfrage aufgetreten!';
 		<p><span class="small">BITTE BEACHTEN: Es sollten mindestens 3 Bilder hochgeladen worden sein, damit der Slider fehlerfrei funktioniert.</span></p>
 <?php
 
-$abfrage = $database->query("SELECT gallery_id, title, page_id FROM ".TABLE_PREFIX."mod_cc_gallery");
-if(isset($abfrage)&&$abfrage->numRows()>0) {
-	$zahler=0;
-	while($row = $abfrage->fetchRow()) {
-		$gallery[$zahler]['gallery_id'] = $row['gallery_id'];
-		$gallery[$zahler]['title'] = $row['title'];
-		$page_link = $database->get_one("SELECT link FROM ".TABLE_PREFIX."pages WHERE page_id = '".$row['page_id']."'");
-		$gallery[$zahler]['page_link'] = page_link($page_link).'?gallery_id='.$gallery[$zahler]['gallery_id'];
-		$zahler++;
-	}
-}
-
 
 $zahler=0;
 $files = $database->query("SELECT * FROM ".TABLE_PREFIX."mod_cc_loupslider_images WHERE loupslider_id = '$loupslider_id'");
@@ -173,26 +161,7 @@ if(isset($files)&&$files->numRows()>0) {
 				<span class="select_link active">
 					Link:<br/>
 					<input type="text" name="link['.$zahler.']" value="'.$row['link'].'" />
-				</span>';
-			if (isset($gallery)){
-				echo '
-				<span class="select_gallery" >
-					Galerie:<br/>
-					<select name="links['.$zahler.']">
-						<option value="">Keine Galerie gewählt</option>';
-					foreach ($gallery as $gal){
-						echo '
-						<option value="'.$gal['page_link'].'"';
-						if ($gal['page_link']==$row['link']) echo ' selected="selected"';
-						echo '>'.$gal['title'].' (ID: '.$gal['gallery_id'].')</option>';
-					}
-					echo '
-					</select>
 				</span>
-				<span class="show_links cc_loupslider_button">Galerie auswählen</span>
-			</p>';
-			}
-		echo '
 		</div>
 		<p class="cc_loupslider_zweispalten">
 			<img src="'.$folder_url.'/'.$row['picture'].'" class="cc_preview" width="500" height="auto" />
